@@ -1,18 +1,19 @@
 steps:
-  # Step 1: Build docker image
   - name: 'gcr.io/cloud-builders/docker'
+    dir: 'my-app'
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/phaluuuuuu/my-app'
+      - 'gcr.io/$PROJECT_ID/my-app'
       - '.'
 
-  # Step 2: Push image
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'gcr.io/phaluuuuuu/my-app'
+      - 'gcr.io/$PROJECT_ID/my-app'
 
-# Store build result
 images:
-  - 'gcr.io/phaluuuuuu/my-app'
+  - 'gcr.io/$PROJECT_ID/my-app'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
